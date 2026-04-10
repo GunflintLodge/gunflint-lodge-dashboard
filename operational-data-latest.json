@@ -1,0 +1,98 @@
+{
+  "generated_at": "2026-04-10T03:11:08.591452Z",
+  "date": "2026-04-09",
+  "summary": {
+    "total_revenue": 5921.42,
+    "spend_per_guest": 169.18,
+    "person_count": 35.0
+  },
+  "today": {
+    "date": "2026-04-09",
+    "occupancy_pct": 45.2,
+    "rooms_sold": 14,
+    "available_rooms": 32,
+    "room_revenue": 3713.08,
+    "adr": 265.22,
+    "revpar": 116.03,
+    "f_and_b_revenue": 2150.0,
+    "food_revenue": 1200.0,
+    "bar_revenue": 950.0,
+    "gift_shop_revenue": 58.34,
+    "activity_revenue": 0,
+    "total_revenue": 5921.42,
+    "person_count": 35.0,
+    "spend_per_guest": 169.18
+  },
+  "mtd": {
+    "occupancy_pct": 47.2,
+    "rooms_sold": 374,
+    "room_revenue": 118646.66,
+    "adr": 317.24,
+    "revpar": 149.62,
+    "f_and_b_revenue": 19000.0,
+    "gift_shop_revenue": 13953.11,
+    "total_revenue": 151599.77
+  },
+  "last_year_mtd": {
+    "occupancy_pct": 42.9,
+    "rooms_sold": 340,
+    "room_revenue": 96509.87,
+    "adr": 283.85,
+    "revpar": 121.7,
+    "f_and_b_revenue": 34000.0,
+    "gift_shop_revenue": 19709.68,
+    "total_revenue": 150219.55
+  },
+  "forecast_7day": [
+    {
+      "date": "2026-04-10",
+      "occupancy_pct": 45,
+      "projected_revenue": 10000
+    },
+    {
+      "date": "2026-04-11",
+      "occupancy_pct": 55,
+      "projected_revenue": 8000
+    },
+    {
+      "date": "2026-04-12",
+      "occupancy_pct": 35,
+      "projected_revenue": 10000
+    },
+    {
+      "date": "2026-04-13",
+      "occupancy_pct": 45,
+      "projected_revenue": 8000
+    },
+    {
+      "date": "2026-04-14",
+      "occupancy_pct": 55,
+      "projected_revenue": 10000
+    },
+    {
+      "date": "2026-04-15",
+      "occupancy_pct": 35,
+      "projected_revenue": 8000
+    },
+    {
+      "date": "2026-04-16",
+      "occupancy_pct": 45,
+      "projected_revenue": 10000
+    }
+  ],
+  "kpis": {
+    "room_revenue_growth_pct": 22.9,
+    "occupancy_change_pts": 4.3,
+    "adr_growth_pct": 11.8,
+    "revpar_growth_pct": 22.9,
+    "f_and_b_change_pct": -44.1,
+    "gift_shop_change_pct": -29.2,
+    "total_revenue_growth_pct": 0.9
+  },
+  "status": "ok",
+  "data_sources": {
+    "roommaster": "direct_extraction",
+    "aireus": "direct_extraction",
+    "flybook": "pending"
+  }
+}

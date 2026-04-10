@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gunflint Lodge — Daily Operations Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <div class="header-content">
+                <h1>🏔️ Gunflint Lodge — Daily Operations</h1>
+                <p class="timestamp">Last updated: <span id="timestamp">--</span></p>
+            </div>
+        </header>
+
+        <div class="alert-banner" id="alertBanner" style="display: none;"></div>
+
+        <div class="grid">
+            <!-- Panel 1: Tonight Overview -->
+            <div class="panel tonight">
+                <div class="panel-header">
+                    <h2>Tonight</h2>
+                    <span class="date" id="todayDate">--</span>
+                </div>
+                <div class="metric-row">
+                    <div class="metric">
+                        <div class="label">Occupancy</div>
+                        <div class="value" id="occupancyPct">--</div>
+                        <div class="unit">%</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">Rooms</div>
+                        <div class="value" id="roomsSold">--</div>
+                        <div class="unit">of 32</div>
+                    </div>
+                </div>
+                <div class="metric-row">
+                    <div class="metric">
+                        <div class="label">ADR</div>
+                        <div class="value">$<span id="adr">--</span></div>
+                        <div class="unit">per room</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">RevPAR</div>
+                        <div class="value">$<span id="revpar">--</span></div>
+                        <div class="unit">available</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 2: Revenue Breakdown -->
+            <div class="panel revenue-breakdown">
+                <div class="panel-header">
+                    <h2>Today's Revenue</h2>
+                </div>
+                <div class="revenue-items">
+                    <div class="revenue-item">
+                        <div class="label">Room Revenue</div>
+                        <div class="value">$<span id="roomRevenue">--</span></div>
+                    </div>
+                    <div class="revenue-item">
+                        <div class="label">F&B Revenue</div>
+                        <div class="value">$<span id="fbRevenue">--</span></div>
+                        <div class="breakdown">(Food: $<span id="foodRev">--</span> | Bar: $<span id="barRev">--</span>)</div>
+                    </div>
+                    <div class="revenue-item">
+                        <div class="label">Gift Shop</div>
+                        <div class="value">$<span id="giftRevenue">--</span></div>
+                    </div>
+                    <div class="revenue-item total">
+                        <div class="label">Total Revenue</div>
+                        <div class="value">$<span id="totalRevenue">--</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 3: Spend Per Guest -->
+            <div class="panel spend-per-guest">
+                <div class="panel-header">
+                    <h2>Guest Value</h2>
+                </div>
+                <div class="big-metric">
+                    <div class="value">$<span id="spendPerGuest">--</span></div>
+                    <div class="label">Spend per Guest</div>
+                </div>
+                <div class="metric-row">
+                    <div class="metric">
+                        <div class="label">Persons</div>
+                        <div class="value" id="personCount">--</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 4: MTD vs Last Year -->
+            <div class="panel mtd-comparison">
+                <div class="panel-header">
+                    <h2>MTD vs Last Year</h2>
+                </div>
+                <div class="comparison-item">
+                    <div class="label">Occupancy</div>
+                    <div class="metric-pair">
+                        <span class="current"><span id="mtdOccupancy">--</span>%</span>
+                        <span class="indicator" id="occupancyIndicator">--</span>
+                        <span class="prior"><span id="mtdOccupancyLY">--</span>%</span>
+                    </div>
+                    <div class="change" id="occupancyChange">--</div>
+                </div>
+                <div class="comparison-item">
+                    <div class="label">Room Revenue</div>
+                    <div class="metric-pair">
+                        <span class="current">$<span id="mtdRevenue">--</span></span>
+                        <span class="indicator" id="revenueIndicator">--</span>
+                        <span class="prior">$<span id="mtdRevenueLY">--</span></span>
+                    </div>
+                    <div class="change" id="revenueChange">--</div>
+                </div>
+                <div class="comparison-item">
+                    <div class="label">ADR</div>
+                    <div class="metric-pair">
+                        <span class="current">$<span id="mtdADR">--</span></span>
+                        <span class="indicator" id="adrIndicator">--</span>
+                        <span class="prior">$<span id="mtdADRLY">--</span></span>
+                    </div>
+                    <div class="change" id="adrChange">--</div>
+                </div>
+            </div>
+
+            <!-- Panel 5: F&B Performance Alert -->
+            <div class="panel fb-alert">
+                <div class="panel-header">
+                    <h2>⚠️ F&B Alert</h2>
+                </div>
+                <div class="alert-content">
+                    <div class="metric-row">
+                        <div class="metric">
+                            <div class="label">MTD Change</div>
+                            <div class="value alert-negative" id="fbChange">--</div>
+                        </div>
+                    </div>
+                    <div class="alert-message">
+                        <p>F&B revenue <strong id="fbChangeVal">--</strong> year-over-year. Requires investigation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 6: Gift Shop Performance -->
+            <div class="panel gift-shop-alert">
+                <div class="panel-header">
+                    <h2>Gift Shop</h2>
+                </div>
+                <div class="metric-row">
+                    <div class="metric">
+                        <div class="label">Today</div>
+                        <div class="value">$<span id="giftToday">--</span></div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">MTD Change</div>
+                        <div class="value" id="giftChange">--</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 7: 7-Day Forecast -->
+            <div class="panel forecast-7day wide">
+                <div class="panel-header">
+                    <h2>7-Day Occupancy Forecast</h2>
+                </div>
+                <canvas id="chart7day" height="100"></canvas>
+            </div>
+
+            <!-- Panel 8: Data Status -->
+            <div class="panel data-status">
+                <div class="panel-header">
+                    <h2>Data Status</h2>
+                </div>
+                <div class="status-items">
+                    <div class="status-item">
+                        <span class="status-dot" id="rmStatus">●</span>
+                        <span>RoomMaster</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-dot" id="aireusStatus">●</span>
+                        <span>Aireus POS</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-dot" id="flybookStatus">●</span>
+                        <span>Flybook</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Dashboard updates automatically every 15 minutes. Last refresh: <span id="refreshTime">--</span></p>
+            <p class="data-sources">Data sources: RoomMaster, Aireus POS, Flybook</p>
+        </footer>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
